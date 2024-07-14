@@ -13,7 +13,7 @@ class ProductController
     public function list()
     {
 
-        $products = (new Product)->getData('sku');
+        $products = Product::get('sku');
 
         return View::load('product/list', [
             'products' => $products
@@ -23,7 +23,7 @@ class ProductController
     public function deleteProducts($productsId)
     {
 
-        (new Product)->deleteBulk($productsId);
+        Product::delete($productsId);
 
         header("Location: /",);
     }
@@ -31,7 +31,7 @@ class ProductController
     public function create()
     {
 
-        $productTypes = (new ProductType)->getData();
+        $productTypes = ProductType::get();
 
         if(isset($_SESSION['errors'])){
             $errors =  $_SESSION['errors'] ;
@@ -47,7 +47,8 @@ class ProductController
     public function checkSkuIsNotExist($sku)
     {
 
-        $product = (new Product)->where('sku', $sku);
+        $product = Product::find('sku', $sku);
+
         if (count($product) > 0) {
             echo false;
         } else {
@@ -57,7 +58,7 @@ class ProductController
 
     public function store($request)
     {
-        $prodName = "models\\productTypes\\" . $_POST['product_type'];
+        $prodName = "Models\\productTypes\\" . $_POST['product_type'];
 
         if (class_exists($prodName)) {
             $product = new $prodName();
@@ -73,7 +74,7 @@ class ProductController
 
             $request['attribute'] = $product->getAttribute();
 
-            (new Product)->create($request);
+            Product::store($request);
 
 
             header("Location: /");

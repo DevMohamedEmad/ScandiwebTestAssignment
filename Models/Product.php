@@ -2,16 +2,14 @@
 
 namespace Models;
 
-use Core\DB;
-
-class Product extends DB
+abstract class Product extends BaseModel
 {
 
     public $attribute;
-    
-    public $table = 'products';
 
-    public $fillable = [
+    public static $table = 'products';
+
+    public static $fillable = [
         'sku',
         'name',
         'price',
@@ -19,6 +17,8 @@ class Product extends DB
     ];
 
     protected array $inputs;
+
+    protected abstract function validateTypeAttribute(array $inputs);
 
     public function validateInputs($inputs)
     {
@@ -29,7 +29,7 @@ class Product extends DB
         $errors[] = $this->validatePrice();
         $errors[] = $this->validateType();
         $errors[] = $this->validateTypeAttribute($inputs);
-        
+
         return $errors;
     }
 
@@ -76,8 +76,9 @@ class Product extends DB
         return "";
     }
 
-    public function getAttribute(){
-      
+    public function getAttribute()
+    {
+
         return $this->attribute;
     }
 }

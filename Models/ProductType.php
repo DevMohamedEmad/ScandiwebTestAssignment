@@ -1,16 +1,14 @@
 <?php
 namespace Models;
 
-use Core\DB;
 
-class ProductType extends DB{
+class ProductType extends BaseModel{
 
-    public $table = 'product_types';
+    public static $table = 'product_types';
 
-    public $fillable = [
+    public static $fillable = [
         'id',
         'name',
-
     ];
 }
 

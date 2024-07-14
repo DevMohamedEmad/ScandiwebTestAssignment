@@ -8,9 +8,11 @@ class DB
 {
     public $conn, $table, $fillable;
 
-    public function __construct()
+    public function __construct($table,$columns)
     {
         $this->conn = (new DbConfigration)->connectionWithDB();
+        $this->table = $table;
+        $this->fillable = $columns;
     }
 
     public function getData($order_by=null)
