@@ -16,7 +16,7 @@ abstract class Product extends BaseModel
         'attribute'
     ];
 
-    protected array $inputs;
+    private array $inputs;
 
     protected abstract function validateTypeAttribute(array $inputs);
 
