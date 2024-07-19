@@ -8,14 +8,14 @@ $routes = match ($_SERVER['REQUEST_METHOD']) {
         '/deleteBulkProducts' => (new ProductController)->deleteProducts($_POST['products']),
         '/checkSkuIsExist' => (new ProductController)->checkSkuIsNotExist($_POST['sku']),
         '/addproduct' => (new ProductController)->store($_POST),
-        default => die('failed'),
+        default => die('pad request url'),
     } ,
     'GET' => match ($_SERVER['REQUEST_URI']) {
         '/' =>(new ProductController)->list(),
         '/addProduct' => (new ProductController)->create(),
-        default => die('failed')
+        default => die('pad request url')
     },
-    default => die('failed')
+    default => die('pad method')
 }
 
 
