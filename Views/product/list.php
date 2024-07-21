@@ -65,7 +65,6 @@
             });
 
             if (checkedValues.length > 0) {
-                console.log('hola');
                 $('#form').submit();
             } else {
                 alert('No checkboxes are checked.');
